@@ -2,37 +2,54 @@ body {
     background-color: #2D3B48;
     padding: 20px;
     margin: 0;
-  }
-  .title {
+}
+
+.title {
     color: white;
-  }
-  h1, h2, p, ul, li {
+}
+
+h1,
+h2,
+p,
+ul,
+li {
     font-family: sans-serif;
-  }
-  ul.header li {
+}
+
+ul.header li {
     display: inline;
     list-style-type: none;
     margin: 0;
-  }
-  ul.header {
+}
+
+ul.header {
     background-color: #23BA91;
     padding: 0;
-  }
-  ul.header li a {
+}
+
+ul.header li a {
     color: #FFF;
     font-weight: bold;
     text-decoration: none;
     padding: 20px;
     display: inline-block;
-  }
-  .content {
+}
+
+.content {
     background-color: #FFF;
     padding: 20px;
-  }
-  .content h2 {
+}
+
+.content h2 {
     padding: 0;
     margin: 0;
-  }
-  .content li {
+}
+
+.content li {
     margin-bottom: 10px;
-  }
+}
+
+.container {
+    display: grid;
+    justify-content: end;
+}
