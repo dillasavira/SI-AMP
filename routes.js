@@ -2,6 +2,13 @@
 
 module.exports = function(app) {
     var jsonku = require('./controller');
+    // var jsonkuu = require('./middleware/auth');
+
+    // app.route('/api/v1/tampil')
+    //     .get(jsonkuu.tampilLogin);
+
+    // app.route('/api/v1/registerr')
+    //     .get(jsonkuu.registrasi);
 
     app.route('/')
         .get(jsonku.index);

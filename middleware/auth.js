@@ -13,10 +13,10 @@ exports.registrasi = function(req, res) {
         email: req.body.email,
         password: md5(req.body.password),
         role: req.body.role,
-        tanggal_daftar: newDate()
+        tanggal_daftar: new Date()
     }
 
-    var query = "SELECT email FROM ?? WHERE ??";
+    var query = "SELECT email FROM ?? WHERE ??=?";
     var table = ["tbl_user", "email", post.email];
 
     query = mysql.format(query, table);
@@ -25,8 +25,8 @@ exports.registrasi = function(req, res) {
         if (error) {
             console.log(error);
         } else {
-            if (rows.lenght == 0) {
-                var query = "INSERT INTO ?? SET ??";
+            if (rows.length == 0) {
+                var query = "INSERT INTO ?? SET ?";
                 var table = ["tbl_user"];
                 query = mysql.format(query, table);
                 connection.query(query, post, function(error, rows) {
@@ -37,8 +37,20 @@ exports.registrasi = function(req, res) {
                     }
                 })
             } else {
-                response.ok("Email sudah terdaftar!");
+                response.ok("Email sudah terdaftar!", res);
             }
         }
     })
 }
+
+//menampilkan matakuliah group
+exports.tampilLogin = function(req, res) {
+    connection.query('SELECT * FROM tbl_user',
+        function(error, rows, fileds) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.oknested(rows, res)
+            }
+        });
+};
