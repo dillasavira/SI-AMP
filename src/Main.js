@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, createContext, useReducer, useState } from "react";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 import Home from "./component/Home/Home";
 import About from "./component/Home/About";
@@ -14,15 +14,42 @@ import HooksUseEffect from "./component/Hooks/Functional/HooksUseEffect";
 import { CartContext } from "./CartContext";
 import ProductComp from "./component/Hooks/Functional/ProductComp";
 import HooksReducer from "./component/Hooks/Functional/HooksReducer";
+import Tagihan from "./component/Hooks/Functional/Tagihan";
+
+export const keranjangContext = createContext()
+
+const initialState={
+    jumlah :1,
+    hargaSatuan:10000,
+    hargaTotal:10000
+}
+const reducer =(state, action)=>{
+    switch(action. type){
+        case 'tambah': return {
+            ...state,
+            jumlah: state.jumlah +1,
+            hargaTotal: state.hargaSatuan + (state.hargaSatuan *state.jumlah)
+        }
+        case 'kurang': return {
+            ...state,
+            jumlah: state.jumlah -1,
+            hargaTotal:  (state.hargaSatuan *state.jumlah)- state.hargaSatuan
+        }
+        default:
+            return state
+    }
+}
 
 const Main = () => {
     const[value,setValue] = useState(0)
+    const[count, dispatch] = useReducer(reducer, initialState)
     return ( <
         BrowserRouter >
         <
         CartContext.Provider value ={{value, setValue}} >
         <
         NavBarKu / >
+        <keranjangContext.Provider value={{keranjangState: count, keranjangDispatch: dispatch}}>
         <
         Switch >
         <
@@ -62,10 +89,15 @@ const Main = () => {
         component = { HooksReducer }
         /> 
         <
+        Route exact path = "/tagihan"
+        component = { Tagihan }
+        /> 
+        <
         Route exact path = "/Login"
         component = { Login }
         /> < /
-        Switch > <
+        Switch > 
+        </keranjangContext.Provider><
         /CartContext.Provider> < /
         BrowserRouter >
     );
