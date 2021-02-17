@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import axios from 'axios';
 import {Container, Row, Col, FormGroup, Alert, Input, Button, Label, Form} from 'reactstrap'
-import {Link} from 'react-router-dom'
-import { json } from 'body-parser';
 
 const api ='http://localhost:3001'
 
-class Tambah extends Component {
+class Tambah extends PureComponent {
 
     constructor(props){
         super(props)
